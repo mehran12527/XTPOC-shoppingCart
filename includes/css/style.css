@@ -285,11 +285,11 @@ table .productSize, table .productPrice, table .productQty{
     float: right;
 }
 .estimated-total{
-width: 100%;
+    width: 100%;
+    margin-top: 20px;
 }
 .estimate-text{
-
-float: left;
+    float: left;
 }
 
 .checkoutbtn button{
@@ -309,4 +309,13 @@ float: left;
 }
 .show{
     display: block;
+}
+.price{
+    font-size: 20px;
+}
+.text-cap{
+    text-transform: uppercase;
+}
+.estimate-total{
+    font-size: 18px;
 }

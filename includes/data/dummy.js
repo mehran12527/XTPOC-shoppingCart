@@ -8,7 +8,7 @@ var data = {
             "model":"MS13KT1906",
             "color":"Blue",
             "size":"S",
-            "orignalPrice":"11.00",
+            "orignalPrice":"12.00",
             "qty":"1",
             "brandName":"UCB"
         },
@@ -18,8 +18,8 @@ var data = {
             "model":"MS13KT1907",
             "color":"Pink",
             "size":"M",
-            "orignalPrice":"118.00",
-            "qty":"1",
+            "orignalPrice":"12.00",
+            "qty":"2",
             "brandName":"PUMA"
         },
         {
@@ -34,4 +34,9 @@ var data = {
             "brandName":"Levis"
         }
     ]
+}
+var promoCodes ={
+    "JF10":"10",
+    "CART60":"60",
+    "FREEDIWALI":"50"
 }

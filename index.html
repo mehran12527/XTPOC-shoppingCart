@@ -18,18 +18,18 @@
 <body>
     <main>
         <script id="cart" type="text/x-handlebars-template">
-            <h1 class="h1">{{pageTitle}}</h1>
+            <h1 class="h1">{{data.pageTitle}}</h1>
             <table>
                 <thead>
                 <tr>
-                        <th colspan="2" >{{numberOfItems}} ITEMS</th>
+                        <th colspan="2" >{{data.numberOfItems}} ITEMS</th>
                         <th class="text-center">SIZE</th>
                         <th class="text-center">QTY</th>
                         <th class="text-center">PRICE</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {{#each products}}
+                    {{#each data.products}}
                         <tr>
                             <td class="productPic">
                                 <img src="{{{imgUrl}}}" alt="" srcset="">
@@ -49,10 +49,10 @@
                             {{#if offerPrice}}
                                 <td class="productPrice">
                                     <p class="lastPrice text-center"><strike><sup>&dollar;</sup>{{orignalPrice}}</strike></p>
-                                    <p class="text-darker currentPrice text-center"><sup>&dollar;</sup>{{offerPrice}}</p>
+                                    <p class="text-darker currentPrice text-center price"><sup>&dollar;</sup>{{offerPrice}}</p>
                                 </td>
                             {{else}}
-                                <td class="productPrice text-darker currentPrice text-center"><p><sup>&dollar;</sup>{{orignalPrice}}</p></td>
+                                <td class="productPrice text-darker currentPrice text-center price"><p><sup>&dollar;</sup>{{orignalPrice}}</p></td>
                             {{/if}}
                         </tr>
                     {{/each}}
@@ -69,31 +69,37 @@
                 <div class="checkout">
                     <p class="promo">
                         <span>Enter Promotion Code Or Gift Card</span>
-                        <input type="text" value="" name="coupoun" >
-                        <input type="submit" value="APPLY">
+                        <input type="text" value="" name="coupoun" id="promoInput">
+                        <input type="submit" value="APPLY" onclick="applyPromo()">
                     </p>
                     <div class="total">
                         <table>
                             <tr>
-                                <th><strong>Subtotal</strong></th>
-                                <td class="text-darker"><span>$</span>141.00</td>
+                                <th><strong class="text-cap">Subtotal</strong></th>
+                                <td class="text-darker price"><span>$</span>{{totalPrice}}</td>
+                            </tr>
+                            <tr class="promo-added hide">
+                                <th><strong id="promoApplied" class="text-cap"></strong></th>
+                                <td class="text-darker price"><span>- $</span><span id="discountedPrice"></span></td>
                             </tr>
                             <tr>
-                                <th><strong>Promotion code Jf10 applied</strong></th>
-                                <td class="text-darker"><span>-$</span>14.00</td>
-                            </tr>
-                            <tr>
-                                <th><strong>Estimated shippping</strong><span>You qualify for free shippping because your order is over $50*</span></th>
-                                <td class="text-dark "><span></span><b>FREE</b></td>
+                                {{#if shippingCharge}}
+                                     <th><strong class="text-cap">Estimated shippping</strong><span></span></th>
+                                     <td class="text-dark price"><span>+ </span><b>$5</b></td>
+                                {{else}}
+                                    <th ><strong class="text-cap">Estimated shippping</strong><span>You qualify for free shippping because your order is over $50*</span></th>
+                                    <td class="text-dark "><span></span><b>FREE</b></td>
+                                {{/if}}
+                               
                             </tr>
                         </table>
                         <div class="estimated-total">
                             <div class="estimated-text">
-                                <strong>Estimated Total </strong>
+                                <strong class="text-cap text-dark estimate-total">Estimated Total </strong>
                                 <p> Tax applicable will be applied at the time of checkout</p>
                             </div>
                     <div class="estimate-price" >
-                    <p class="text-darker"><strong><span>$</span></strong>127.00</p>
+                    <p class="text-darker price"><strong><span>$</span></strong><span id="finalPrice">{{finalPrice}}</span></p>
                     </div>
                         </div>
                         <div class="checkoutbtn">
