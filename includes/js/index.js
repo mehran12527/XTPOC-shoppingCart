@@ -42,19 +42,23 @@ function calculateTotal(){
 function applyPromo(){
     var discount = 0;
     var total = calculateTotal();
-    var promo = $("#promoInput").val();
+    var promo = $("#promoInput").val().toUpperCase();
     if(promoCodes[promo]){
+        $(".promo-error").addClass("hide");
         discount = total*parseInt(promoCodes[promo])*0.01;
-        $(".promo-added ").removeClass("hide")
+        $(".promo-added ").removeClass("hide");
         $("#promoApplied").html("Promotion code "+promo+" applied");
         $("#discountedPrice").html(discount.toFixed( 2 ));
         $("#finalPrice").html(caclulateFinal(total,discount));
+    }
+    else{
+        $(".promo-error").removeClass("hide");
     }
 
 }
 function caclulateFinal(totalPrice, promoDiscount){
     if(promoDiscount){
-        totalPrice-=promoDiscount
+        totalPrice-=promoDiscount;
     }
     if(totalPrice<50){
         totalPrice+=5;
