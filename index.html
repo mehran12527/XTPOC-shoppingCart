@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./includes/css/style.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script defer src="./includes/data/dummy.js"></script>
+    <script defer src="./lib/handlebars-v4.0.12.js"></script>
+    <script defer src="./includes/js/index.js"></script>
+</head>
+
+<body>
+    <main>
+        <script id="cart" type="text/x-handlebars-template">
+            <h1 class="h1">{{pageTitle}}</h1>
+            <table>
+                <thead>
+                <tr>
+                        <th colspan="2" >{{numberOfItems}} ITEMS</th>
+                        <th class="text-center">SIZE</th>
+                        <th class="text-center">QTY</th>
+                        <th class="text-center">PRICE</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                        <tr>
+                            <td class="productPic">
+                                <img src="{{{imgUrl}}}" alt="" srcset="">
+                            </td>
+                            <td class="productDetail">
+                                <p class="text-dark productName"><b>{{productName}}</b></p>
+                                <p>Style #: {{model}}</p>
+                                <p>Colour: {{color}}</p>
+                                <p class="actions">
+                                    <button type="button" onclick="showOverlay({{json this}})">EDIT</button>|
+                                    <button type="button"><b>X </b>REMOVE</button>|
+                                    <button type="button">SAVE FOR LATER</button>
+                                </p>
+                            </td>
+                            <td class="productSize text-center"><p>{{size}}</p></td>
+                            <td class="productQty text-center"><input type="number" name="quantity" value="{{qty}}"></td>
+                            {{#if offerPrice}}
+                                <td class="productPrice">
+                                    <p class="lastPrice text-center"><strike><sup>&dollar;</sup>{{orignalPrice}}</strike></p>
+                                    <p class="text-darker currentPrice text-center"><sup>&dollar;</sup>{{offerPrice}}</p>
+                                </td>
+                            {{else}}
+                                <td class="productPrice text-darker currentPrice text-center"><p><sup>&dollar;</sup>{{orignalPrice}}</p></td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <section class="help-checkout">
+                <div class="contact">
+                    <p class="text-dark"><b>Need help <br>or have questions?</b></p>
+                    <p>Call Customer Service at</p>
+                    <label><a href="tel://18005555555">1-800-555-5555</a></label>
+                    <p><a href="javascript:void(0)" role="button">Chat with one of our stylists</a></p>
+                    <p><a href="javascript:void(0)" role="button">See Return & exchange policy</a></p>
+                </div>
+                <div class="checkout">
+                    <p class="promo">
+                        <span>Enter Promotion Code Or Gift Card</span>
+                        <input type="text" value="" name="coupoun" >
+                        <input type="submit" value="APPLY">
+                    </p>
+                    <div class="total">
+                        <table>
+                            <tr>
+                                <th><strong>Subtotal</strong></th>
+                                <td class="text-darker"><span>$</span>141.00</td>
+                            </tr>
+                            <tr>
+                                <th><strong>Promotion code Jf10 applied</strong></th>
+                                <td class="text-darker"><span>-$</span>14.00</td>
+                            </tr>
+                            <tr>
+                                <th><strong>Estimated shippping</strong><span>You qualify for free shippping because your order is over $50*</span></th>
+                                <td class="text-dark "><span></span><b>FREE</b></td>
+                            </tr>
+                        </table>
+                        <div class="estimated-total">
+                            <div class="estimated-text">
+                                <strong>Estimated Total </strong>
+                                <p> Tax applicable will be applied at the time of checkout</p>
+                            </div>
+                    <div class="estimate-price" >
+                    <p class="text-darker"><strong><span>$</span></strong>127.00</p>
+                    </div>
+                        </div>
+                        <div class="checkoutbtn">
+
+                        <a href="javascript:void(0)" role="button">CONTINUE SHOPPING  </a>
+                        <span>
+                                <button type="button">CHECKOUT</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </script>
+        <script id="overlayModal" type="text/x-handlebars-template">
+            <div id="modal" class="modal">
+                    <div class="modal-body">
+                        <a class="close" href="javascript:hideOverlay()">x</a>
+                        <div class="product-wrap">
+                            <div class="product-image">
+                                <img src="{{imgUrl}}">
+                            </div>
+                            <div class="product-detail">
+                                <h3>{{productName}}</h3>
+                                <label class="price"><span>$</span>{{orignalPrice}}</label>
+                                <span class="brandname">{{brandName}}</span>
+                                <ul>
+                                    <li><span style="background-color:fff;"></span></li>
+                                    <li><span style="background-color:lightgreen;"></span></li>
+                                </ul>
+                                <div class="custom-select">
+                                    <select>
+                                        <option>Size</option>
+                                        <option>S</option>
+                                        <option>M</option>
+                                        <option>L</option>
+                                    </select>
+                                </div>
+                                <div class="custom-select">
+                                    <select>
+                                        <option>Qty:{{qty}}</option>
+                                    </select>
+                                </div>
+                                <button type="button">EDIT</button>
+                                <a href="">See product details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </script>
+    </main>
+</body>
+
+</html>
