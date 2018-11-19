@@ -27,7 +27,7 @@ function showOverlay(product){
 function hideOverlay(){
     $("#modal").remove();
 }
-function calculateTotal(){
+function calculateTotal(data){
     var totalPrice = 0;
     data.products.forEach(function(product) {
         if(product.offerPrice){
@@ -37,11 +37,21 @@ function calculateTotal(){
             totalPrice+=parseFloat(product.orignalPrice);
         }
     });
+    console.log(totalPrice)
+    if(totalPrice>50){
+        $("#freeShipping").removeClass("hide");
+        $("#shippingCharged").addClass("hide");
+        $("#shippingCharged").removeClass("show-table-row");
+    }
+    else{
+        $("#shippingCharged").removeClass("hide");
+        $("#freeShipping").addClass("hide");
+    }
     return totalPrice;
 }
 function applyPromo(){
     var discount = 0;
-    var total = calculateTotal();
+    var total = calculateTotal(window.data);
     var promo = $("#promoInput").val().toUpperCase();
     if(promoCodes[promo]){
         $(".promo-error").addClass("hide");
@@ -64,4 +74,43 @@ function caclulateFinal(totalPrice, promoDiscount){
         totalPrice+=5;
     }
     return totalPrice;
+}
+
+function quantprice(event,productId){
+    var finalPrice = 0;
+    var tempData =  JSON.parse(JSON.stringify(data));
+    data.products.forEach(function(product,idx) {
+        if(product.productId === productId){
+            if(product.offerPrice){
+               var qty = event.target.value;
+               if(qty){
+                    finalPrice = parseFloat(qty* parseFloat(product.offerPrice)).toFixed(2);
+                   
+               }
+               else{
+                   finalPrice =  parseFloat(product.offerPrice).toFixed(2);
+                   
+               }
+               tempData.products[idx].offerPrice = finalPrice;
+               $(event.target).parent().siblings(".productPrice").children(".currentPrice").html("<p><sup>&dollar;</sup>"+finalPrice+"</p>");
+            }
+            else{
+                var qty = event.target.value;
+               if(qty){
+                    finalPrice =  parseFloat(qty* parseFloat(product.orignalPrice)).toFixed(2);
+               }
+               else{
+                   finalPrice = parseFloat(product.orignalPrice).toFixed(2);
+               }
+               tempData.products[idx].orignalPrice = finalPrice;
+               $(event.target).parent().siblings(".productPrice").html("<p><sup>&dollar;</sup>"+finalPrice+"</p>");
+               
+            }
+        }    
+    });
+    $("#totalPrice").html("<span>$</span>"+calculateTotal(tempData))
+     $("#finalPrice").html(caclulateFinal(calculateTotal(tempData)))
+  
+    
+    
 }

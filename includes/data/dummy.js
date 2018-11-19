@@ -10,7 +10,8 @@ var data = {
             "size":"S",
             "orignalPrice":"12.00",
             "qty":"1",
-            "brandName":"UCB"
+            "brandName":"UCB",
+        "productId":"1001"
         },
         {
             "imgUrl": "./includes/images/image2.jpg",
@@ -18,9 +19,11 @@ var data = {
             "model":"MS13KT1907",
             "color":"Pink",
             "size":"M",
-            "orignalPrice":"12.00",
-            "qty":"2",
-            "brandName":"PUMA"
+            "orignalPrice":"9.00",
+            "qty":"1",
+            "brandName":"PUMA",
+            "productId":"1002"
+
         },
         {
             "imgUrl": "./includes/images/image3.jpg",
@@ -29,9 +32,11 @@ var data = {
             "color":"Blue",
             "size":"L",
             "orignalPrice":"17.00",
-            "offerPrice":"12.00",
+            "offerPrice":"11.00",
             "qty":"1",
-            "brandName":"Levis"
+            "brandName":"Levis",
+            "productId":"1003"
+
         }
     ]
 }

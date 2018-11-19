@@ -322,3 +322,6 @@ table .productSize, table .productPrice, table .productQty{
 .promo-error{
     color: #FF0000;
 }
+.show-table-row{
+    display: table-row;
+}
