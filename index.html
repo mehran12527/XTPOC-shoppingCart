@@ -45,7 +45,7 @@
                                 </p>
                             </td>
                             <td class="productSize text-center"><p>{{size}}</p></td>
-                            <td class="productQty text-center"><input type="number" name="quantity" value="{{qty}}"></td>
+                            <td class="productQty text-center"><input type="number" name="quantity" value="{{qty}}" onkeyup="quantprice(event,'{{productId}}')"></td>
                             {{#if offerPrice}}
                                 <td class="productPrice">
                                     <p class="lastPrice text-center"><strike><sup>&dollar;</sup>{{orignalPrice}}</strike></p>
@@ -77,21 +77,21 @@
                         <table>
                             <tr>
                                 <th><strong class="text-cap">Subtotal</strong></th>
-                                <td class="text-darker price"><span>$</span>{{totalPrice}}</td>
+                                <td class="text-darker price" id="totalPrice"><span>$</span>{{totalPrice}}</td>
                             </tr>
                             <tr class="promo-added hide">
                                 <th><strong id="promoApplied" class="text-cap"></strong></th>
                                 <td class="text-darker price"><span>- $</span><span id="discountedPrice"></span></td>
                             </tr>
-                            <tr>
-                                {{#if shippingCharge}}
-                                     <th><strong class="text-cap">Estimated shippping</strong><span></span></th>
-                                     <td class="text-dark price"><span>+ </span><b>$5</b></td>
-                                {{else}}
-                                    <th ><strong class="text-cap">Estimated shippping</strong><span>You qualify for free shippping because your order is over $50*</span></th>
-                                    <td class="text-dark "><span></span><b>FREE</b></td>
-                                {{/if}}
-                               
+                            <tr id="shippingCharged" {{#if shippingCharge}} class="show-table-row"{{/if}}> 
+                                <th><strong class="text-cap">Estimated shippping</strong><span></span></th>
+                                <td class="text-dark price"><span>+ </span><b>$5</b></td>
+                            </tr>
+                            <tr id="freeShipping" {{#if shippingCharge}} class="hide"{{/if}}>      
+
+                                <th ><strong class="text-cap">Estimated shippping</strong><span>You qualify for free shippping because your order is over $50*</span></th>
+                                <td class="text-dark "><span></span><b>FREE</b></td>
+                            
                             </tr>
                         </table>
                         <div class="estimated-total">
