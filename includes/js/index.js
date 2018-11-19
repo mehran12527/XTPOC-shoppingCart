@@ -83,9 +83,15 @@ function quantprice(event,productId){
         if(product.productId === productId){
             if(product.offerPrice){
                var qty = event.target.value;
-               if(qty){
+               if(qty && qty>0){
                     finalPrice = parseFloat(qty* parseFloat(product.offerPrice)).toFixed(2);
+                    $(event.target).css("background-color", "white");
+                   $(event.target).css("color", "black");
                    
+               }
+               else if(qty<0){
+                   $(event.target).css("background-color", "red");
+                   $(event.target).css("color", "white");
                }
                else{
                    finalPrice =  parseFloat(product.offerPrice).toFixed(2);
