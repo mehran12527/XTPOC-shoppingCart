@@ -1,8 +1,9 @@
+var tempData =  JSON.parse(JSON.stringify(data));
 $(document ).ready(function(){
     Handlebars.registerHelper('json', function(context) {
         return JSON.stringify(context);
     });
-    var totalPrice = calculateTotal(data);
+    var totalPrice = calculateTotal();
     var finalPrice = caclulateFinal(totalPrice)
     var context = null;
     if(totalPrice<50){
@@ -27,9 +28,9 @@ function showOverlay(product){
 function hideOverlay(){
     $("#modal").remove();
 }
-function calculateTotal(data){
+function calculateTotal(){
     var totalPrice = 0;
-    data.products.forEach(function(product) {
+    tempData.products.forEach(function(product) {
         if(product.offerPrice){
             totalPrice+=parseFloat(product.offerPrice);
         }
@@ -37,7 +38,6 @@ function calculateTotal(data){
             totalPrice+=parseFloat(product.orignalPrice);
         }
     });
-    console.log(totalPrice)
     if(totalPrice>50){
         $("#freeShipping").removeClass("hide");
         $("#shippingCharged").addClass("hide");
@@ -51,7 +51,7 @@ function calculateTotal(data){
 }
 function applyPromo(){
     var discount = 0;
-    var total = calculateTotal(window.data);
+    var total = calculateTotal();
     var promo = $("#promoInput").val().toUpperCase();
     if(promoCodes[promo]){
         $(".promo-error").addClass("hide");
@@ -78,7 +78,6 @@ function caclulateFinal(totalPrice, promoDiscount){
 
 function quantprice(event,productId){
     var finalPrice = 0;
-    var tempData =  JSON.parse(JSON.stringify(data));
     data.products.forEach(function(product,idx) {
         if(product.productId === productId){
             if(product.offerPrice){
@@ -86,12 +85,13 @@ function quantprice(event,productId){
                if(qty && qty>0){
                     finalPrice = parseFloat(qty* parseFloat(product.offerPrice)).toFixed(2);
                     $(event.target).css("background-color", "white");
-                   $(event.target).css("color", "black");
+                    $(event.target).css("color", "black");
                    
                }
                else if(qty<0){
                    $(event.target).css("background-color", "red");
                    $(event.target).css("color", "white");
+                   finalPrice =  parseFloat(product.offerPrice).toFixed(2);
                }
                else{
                    finalPrice =  parseFloat(product.offerPrice).toFixed(2);
@@ -102,9 +102,18 @@ function quantprice(event,productId){
             }
             else{
                 var qty = event.target.value;
-               if(qty){
+               if(qty && qty>0){
                     finalPrice =  parseFloat(qty* parseFloat(product.orignalPrice)).toFixed(2);
+                    $(event.target).css("background-color", "white");
+                    $(event.target).css("color", "black");
+                    
                }
+
+               else if(qty<0){
+                $(event.target).css("background-color", "red");
+                $(event.target).css("color", "white");
+                finalPrice = parseFloat(product.orignalPrice).toFixed(2);
+            }
                else{
                    finalPrice = parseFloat(product.orignalPrice).toFixed(2);
                }
@@ -114,8 +123,8 @@ function quantprice(event,productId){
             }
         }    
     });
-    $("#totalPrice").html("<span>$</span>"+calculateTotal(tempData))
-     $("#finalPrice").html(caclulateFinal(calculateTotal(tempData)))
+    $("#totalPrice").html("<span>$</span>"+calculateTotal())
+     $("#finalPrice").html(caclulateFinal(calculateTotal()))
   
     
     
