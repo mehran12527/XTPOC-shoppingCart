@@ -13,6 +13,8 @@
     <script defer src="./includes/data/dummy.js"></script>
     <script defer src="./lib/handlebars-v4.0.12.js"></script>
     <script defer src="./includes/js/index.js"></script>
+    
+      
 </head>
 
 <body>
@@ -20,7 +22,7 @@
         <script id="cart" type="text/x-handlebars-template">
             <h1 class="h1">{{data.pageTitle}}</h1>
             <table>
-                <thead>
+                <thead class="respon-thead">
                 <tr>
                         <th colspan="2" >{{data.numberOfItems}} ITEMS</th>
                         <th class="text-center">SIZE</th>
@@ -30,6 +32,7 @@
                 </thead>
                 <tbody>
                     {{#each data.products}}
+                    <label class="desktop">
                         <tr>
                             <td class="productPic">
                                 <img src="{{{imgUrl}}}" alt="" srcset="">
@@ -38,7 +41,7 @@
                                 <p class="text-dark productName"><b>{{productName}}</b></p>
                                 <p>Style #: {{model}}</p>
                                 <p>Colour: {{color}}</p>
-                                <p class="actions">
+                                <p class="actions respon-actions">
                                     <button type="button" onclick="showOverlay({{json this}})">EDIT</button>|
                                     <button type="button"><b>X </b>REMOVE</button>|
                                     <button type="button">SAVE FOR LATER</button>
@@ -55,9 +58,48 @@
                                 <td class="productPrice text-darker currentPrice text-center price"><p><sup>&dollar;</sup>{{orignalPrice}}</p></td>
                             {{/if}}
                         </tr>
+                    </label>
+
                     {{/each}}
+
+
+
+
                 </tbody>
             </table>
+            {{#each data.products}}
+            <label class="mobile">
+                <div class="up">
+                    <div class="picture">
+                        <img src="{{{imgUrl}}}" alt="picture" width="140px" height="180px">
+                    </div>
+                    <div class="productDetailmobile">
+                        <p class="text-dark productName"><b>{{productName}}</b></p>
+                        <p>Style #:{{model}}</p>
+                        <p>Colour: {{color}}</p>
+                       <p>Size :{{size}}</p>
+                       
+                       <input type="number" name="quantity" value="{{qty}}" onkeyup="quantprice(event,'{{productId}}')">
+                       {{#if offerPrice}}
+                       <td class="productPrice">
+                           <p class="lastPrice text-center"><strike><sup>&dollar;</sup>{{orignalPrice}}</strike></p>
+                           <p class="text-darker currentPrice text-center price"><sup>&dollar;</sup>{{offerPrice}}</p>
+                       </td>
+                   {{else}}
+                   <div class="pricemobile">
+                       <td class="productPrice text-darker currentPrice text-center price"><p><sup>&dollar;</sup>{{orignalPrice}}</p></td>
+                    </div>    {{/if}}
+                    </div>
+                </div>
+                <div>
+                    <p class="actionsmobile">
+                            <button type="button" onclick="showOverlay({{json this}})">EDIT</button>|
+                        <button type="button"><b>X </b>REMOVE</button>|
+                        <button type="button">SAVE FOR LATER</button>
+                    </p>
+                </div></label>
+                {{/each}}
+     
             <section class="help-checkout">
                 <div class="contact">
                     <p class="text-dark"><b>Need help <br>or have questions?</b></p>
@@ -72,6 +114,13 @@
                         <input type="text" value="" name="coupoun" id="promoInput">
                         <input type="submit" value="APPLY" onclick="applyPromo()">
                     </p>
+
+
+
+
+
+
+
                     <p class="promo-error hide">Promo code is not valid</p>
                     <div class="total">
                         <table>
@@ -108,7 +157,11 @@
                         <a href="javascript:void(0)" role="button">CONTINUE SHOPPING  </a>
                         <span>
                                 <button type="button">CHECKOUT</button>
-                            </span>
+                            </span><br>
+                            <i class="fa fa-lock lock"></i>
+                            <p class="secure">Secure checkout .Shopping is always safe & secure.</p>
+                       <br>
+                          <p class="sign-in" ><b>SIGN IN </b>to save your cart and access to your items on mobile </p>
                         </div>
                     </div>
                 </div>

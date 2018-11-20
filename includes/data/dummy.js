@@ -3,10 +3,10 @@ var data = {
     "numberOfItems":"3",
     "products":[
         {
-            "imgUrl": "./includes/images/image1.jpg",
+            "imgUrl": "./includes/images/image11.jpg",
             "productName":"solid green cotton tshirt",
             "model":"MS13KT1906",
-            "color":"Blue",
+            "color":"Green",
             "size":"S",
             "orignalPrice":"12.00",
             "qty":"1",
@@ -14,7 +14,7 @@ var data = {
         "productId":"1001"
         },
         {
-            "imgUrl": "./includes/images/image2.jpg",
+            "imgUrl": "./includes/images/image12.jpg",
             "productName":"Pink rainbow print girls tee",
             "model":"MS13KT1907",
             "color":"Pink",
