@@ -35,7 +35,7 @@
                     <label class="desktop">
                         <tr>
                             <td class="productPic">
-                                <img src="{{{imgUrl}}}" alt="" srcset="">
+                                <img src="{{{imgUrl}}}" alt="" srcset="" class="prodimg">
                             </td>
                             <td class="productDetail">
                                 <p class="text-dark productName"><b>{{productName}}</b></p>
@@ -71,7 +71,7 @@
             <label class="mobile">
                 <div class="up">
                     <div class="picture">
-                        <img src="{{{imgUrl}}}" alt="picture" width="140px" height="180px">
+                        <img src="{{{imgUrl}}}" alt="picture" width="140px" height="180px" class="prodimg">
                     </div>
                     <div class="productDetailmobile">
                         <p class="text-dark productName"><b>{{productName}}</b></p>
@@ -146,7 +146,7 @@
                         <div class="estimated-total">
                             <div class="estimated-text">
                                 <strong class="text-cap text-dark estimate-total">Estimated Total </strong>
-                                <p> Tax applicable will be applied at the time of checkout</p>
+                                <p class="tax"> Tax applicable will be applied at the time of checkout</p>
                             </div>
                     <div class="estimate-price" >
                     <p class="text-darker price"><strong><span>$</span></strong><span id="finalPrice">{{finalPrice}}</span></p>
@@ -158,10 +158,12 @@
                         <span>
                                 <button type="button">CHECKOUT</button>
                             </span><br>
-                            <i class="fa fa-lock lock"></i>
-                            <p class="secure">Secure checkout .Shopping is always safe & secure.</p>
+                            <p class="secure"></i>Secure checkout .Shopping is always safe & secure.</p>
+                            <img src="./includes/images/lock.jpg" class="lock" alt="lock" >
+
                        <br>
                           <p class="sign-in" ><b>SIGN IN </b>to save your cart and access to your items on mobile </p>
+                          <br>
                         </div>
                     </div>
                 </div>
@@ -173,7 +175,7 @@
                         <a class="close" href="javascript:hideOverlay()">x</a>
                         <div class="product-wrap">
                             <div class="product-image">
-                                <img src="{{imgUrl}}">
+                                <img src="{{imgUrl}}" class="prodimg">
                             </div>
                             <div class="product-detail">
                                 <h3>{{productName}}</h3>
